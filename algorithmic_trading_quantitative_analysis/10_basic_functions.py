@@ -42,3 +42,15 @@ daily_return.mean()
 daily_return.mean(axis=1)
 #Standard deviation for daily return:
 daily_return.std()
+
+
+#Simple Moving Average (SMA) Range to the number of periods (10 days into 1 entry)
+#The weight of the values is the same. Add the 10 last values and divide it by 10.
+daily_return.rolling(window=10, min_periods=6).mean()
+daily_return.rolling(window=10).std()
+daily_return.rolling(window=10).max()
+daily_return.rolling(window=10).min()
+
+#Exponential moving average (EMA) Exponential weighting operation
+#More recent values have more weight over the last values.
+daily_return.ewm
