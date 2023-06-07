@@ -53,4 +53,4 @@ daily_return.rolling(window=10).min()
 
 #Exponential moving average (EMA) Exponential weighting operation
 #More recent values have more weight over the last values.
-daily_return.ewm
+df2= daily_return.ewm(com=10, min_periods=10).mean()
