@@ -1,31 +1,26 @@
-"""
-Created on Tue Jun  6 16:24:42 2023
-@author: devAlberto
-"""
+# ============================================================================
+# Getting financial data from yahoo finance using webscraping - Intro
+# Author - Mayank Rasu
+
+# Please report bugs/issues in the Q&A section
+# =============================================================================
 
 import requests
 from bs4 import BeautifulSoup
 
+#Scraping income statement for a static ticker
 income_statement = {}
-
 url = "https://finance.yahoo.com/quote/AAPL/financials?p=AAPL"
-
 #Avoid yahoo detect we are using a bot.
-headers = {"User-Agent": "Chrome/114.0.5735.110"}
-#Make a request to the page and get the html code:
+headers = {"User-Agent" : "Chrome/96.0.4664.110"}
+#Send request and get html content back:
 page = requests.get(url, headers=headers)
 page_content = page.content
-#Generate a BeautifulSoup object sending html code and the parser:
 soup = BeautifulSoup(page_content,"html.parser")
-#Find the div with breakdown of income statements table
-table = soup.find_all("div", {"class": "M(0) Whs(n) BdEnd Bdc($seperatorColor) D(itb)"})
-
-#Loop through every 
-for t in table:
-    #Iterate through tables:
-    rows = t.find_all("div", {"class": "D(tbr) fi-row Bgc($hoverBgColor):h"})
-        
+#Get income statement table using find_all function:
+tabl = soup.find_all("div" , {"class" : "M(0) Whs(n) BdEnd Bdc($seperatorColor) D(itb)"})
+for t in tabl:
+    rows = t.find_all("div" , {"class": "D(tbr) fi-row Bgc($hoverBgColor):h"})
+    #Get all the rows attribute and its value:
     for row in rows:
         income_statement[row.get_text(separator="|").split("|")[0]] = row.get_text(separator="|").split("|")[1]
-
-print(income_statement)
