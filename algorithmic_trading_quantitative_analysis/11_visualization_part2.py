@@ -30,5 +30,8 @@ daily_return = close_price.pct_change()
 
 #Matplotlib has more custom parameters to allow you to improve your graphs:
 fig, ax = plt.subplots()
+plt.style.available
+plt.style.use("seaborn-darkgrid")
 ax.set(title="Mean Daily Return", xlabel="Stocks", ylabel="Mean Return")
 plt.bar(x=daily_return.columns, height=daily_return.mean())
+plt.bar(x=daily_return.columns, height=daily_return.std())
