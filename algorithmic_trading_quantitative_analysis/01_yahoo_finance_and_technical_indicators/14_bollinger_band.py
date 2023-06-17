@@ -24,8 +24,8 @@ def Boll_Band(DF, n=14):
     #Lower band
     df["LB"] = df["MB"] - 2*df["Adj Close"].rolling(n).std(ddof=0)
     #Bollinger band width
-    df["BB_Width"] = df["UB"] - df["UB"]    
+    df["BB_Width"] = df["UB"] - df["LB"]  
     return df[["MB","UB","LB","BB_Width"]]
 
 for ticker in ohlcv_data:
-    ohlcv_data[ticker]["MB","UB","LB","BB_Width"] = Boll_Band(ohlcv_data[ticker],20)
+    ohlcv_data[ticker][["MB","UB","LB","BB_Width"]] = Boll_Band(ohlcv_data[ticker],20)
