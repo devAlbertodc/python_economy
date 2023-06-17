@@ -1,8 +1,0 @@
-create virtual environment:
-	conda create --name quant python=3.9
-
-Get all the existing environments
-	conda info --envs
-
-Install spyder (if neccesary):
-	pip install spyder
